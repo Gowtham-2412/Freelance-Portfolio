@@ -309,10 +309,6 @@ export default function PortfolioPage() {
               
               {/* Global Availability Tag */}
               <div className="inline-flex items-center space-x-2.5 text-brand-rust mb-4">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
                 <span className="text-xs uppercase font-bold tracking-widest font-sans">
                   Available for Remote Projects Worldwide & India · EST, GMT & IST
                 </span>
@@ -325,7 +321,7 @@ export default function PortfolioPage() {
 
               {/* Supporting Copy */}
               <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-2xl mb-6">
-                Sai Gowtham engineers fast, modern, and SEO-friendly web experiences for startups, growing brands, and businesses across the US, Europe, Middle East, and India — delivered with direct collaboration, total transparency, and zero agency bloat.
+                Gowtham engineers fast, modern, and SEO-friendly web experiences for startups, growing brands, and businesses across the US, Europe, Middle East, and India — delivered with direct collaboration, total transparency, and zero agency bloat.
               </p>
 
               {/* Dual CTAs & Trust Strip */}
@@ -820,10 +816,6 @@ export default function PortfolioPage() {
 
             {/* Package 2: Business (Featured) */}
             <div className="bg-[#FAF7F2] border-2 border-brand-indigo p-8 flex flex-col justify-between card-interactive reveal-on-scroll relative shadow-md">
-              {/* Popular Tag */}
-              <div className="absolute -top-3.5 left-6 bg-brand-indigo text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1 shadow-xs">
-                Most Popular
-              </div>
 
               <div>
                 <h3 className="text-xs uppercase font-bold tracking-widest text-brand-indigo mb-4">Business Website</h3>
@@ -1274,7 +1266,7 @@ export default function PortfolioPage() {
 
           {/* Copyright row */}
           <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-foreground/50">
-            <span className="mt-2 sm:mt-0 font-light">Handcrafted by Sai Gowtham. Available for global remote projects.</span>
+            <span className="mt-2 sm:mt-0 font-light">Handcrafted by Gowtham. Available for global remote projects.</span>
           </div>
         </div>
       </footer>

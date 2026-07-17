@@ -52,13 +52,34 @@ export default function PortfolioPage() {
   // FAQ states
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Monitor scroll to update header styles
+  // Monitor scroll to update header styles and trigger scroll reveal animations
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+        }
+      });
+    };
+
+    const observerOptions: IntersectionObserverInit = {
+      threshold: 0.08,
+      rootMargin: "0px 0px -30px 0px"
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const toggleFaq = (index: number) => {
@@ -284,11 +305,14 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
             {/* Left Column: Headline and Copy */}
-            <div className="lg:col-span-6 flex flex-col justify-center">
+            <div className="lg:col-span-6 flex flex-col justify-center reveal-on-scroll">
               
               {/* Global Availability Tag */}
-              <div className="inline-flex items-center space-x-2 text-brand-rust mb-4">
-                <Globe2 className="h-4 w-4 text-brand-rust animate-pulse" />
+              <div className="inline-flex items-center space-x-2.5 text-brand-rust mb-4">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
                 <span className="text-xs uppercase font-bold tracking-widest font-sans">
                   Available for Remote Projects Worldwide & India · EST, GMT & IST
                 </span>
@@ -310,14 +334,14 @@ export default function PortfolioPage() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-brand-indigo hover:bg-brand-indigo-hover text-white text-sm font-semibold uppercase tracking-wider transition-colors shadow-md text-center"
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-brand-indigo hover:bg-brand-indigo-hover text-white text-sm font-semibold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 text-center"
                 >
                   Discuss Your Project
-                  <MessageSquare className="ml-2 h-4 w-4 fill-white/10" />
+                  <MessageSquare className="ml-2 h-4 w-4 fill-white/10 group-hover:scale-110 transition-transform" />
                 </a>
                 <a 
                   href="#work"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-card-bg text-foreground border border-border-editorial text-sm font-semibold uppercase tracking-wider transition-colors text-center"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-card-bg text-foreground border border-border-editorial hover:border-brand-indigo/40 text-sm font-semibold uppercase tracking-wider transition-all duration-300 text-center"
                 >
                   View My Work
                 </a>
@@ -341,15 +365,15 @@ export default function PortfolioPage() {
 
             </div>
 
-            {/* Right Column: Hero Visual Presentation */}
-            <div className="lg:col-span-6 flex items-center justify-center w-full mt-12 lg:mt-0">
-              <div className="relative w-full aspect-[4/3] max-w-[600px] lg:max-w-none">
+            {/* Right Column: Hero Visual Presentation with Gentle Float */}
+            <div className="lg:col-span-6 flex items-center justify-center w-full mt-12 lg:mt-0 reveal-on-scroll">
+              <div className="relative w-full aspect-[4/3] max-w-[600px] lg:max-w-none animate-float">
                 <Image 
                   src="/Hero-image.png" 
                   alt="Responsive Web Design Showcase" 
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain"
+                  className="object-contain drop-shadow-md"
                   priority
                 />
               </div>
@@ -364,29 +388,29 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             
-            <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Global & Remote First</span>
+            <div className="flex flex-col border-l-2 border-brand-indigo pl-4 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1 group-hover:text-brand-indigo transition-colors">Global & Remote First</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
                 Async video updates & flexible sync calls adapted to US, EU, and IST timezones.
               </p>
             </div>
             
-            <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Direct Developer Access</span>
+            <div className="flex flex-col border-l-2 border-brand-indigo pl-4 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1 group-hover:text-brand-indigo transition-colors">Direct Developer Access</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
                 Work directly with the engineer building your site. Zero middle management.
               </p>
             </div>
             
-            <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">High-Speed Engineering</span>
+            <div className="flex flex-col border-l-2 border-brand-indigo pl-4 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1 group-hover:text-brand-indigo transition-colors">High-Speed Engineering</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
                 Sub-2-second loads, mobile-first layouts, and clean Next.js architecture.
               </p>
             </div>
             
-            <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Full IP Transfer</span>
+            <div className="flex flex-col border-l-2 border-brand-indigo pl-4 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1 group-hover:text-brand-indigo transition-colors">Full IP Transfer</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
                 You own 100% of your source code, design assets, and cloud deployment.
               </p>
@@ -401,7 +425,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           
           {/* Section Header */}
-          <div className="mb-16">
+          <div className="mb-16 reveal-on-scroll">
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground mb-4">
               Selected Work
             </h2>
@@ -414,7 +438,7 @@ export default function PortfolioPage() {
           <div className="space-y-24">
             
             {/* PROJECT 1 - LD REAL ESTATES (Primary Commercial Case Study) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center reveal-on-scroll">
               {/* Info Column */}
               <div className="lg:col-span-5 order-2 lg:order-1">
                 <span className="text-xs uppercase tracking-wider text-brand-rust font-bold mb-2 block">
@@ -496,12 +520,12 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           
           {/* Section Header */}
-          <div className="mb-16">
+          <div className="mb-16 reveal-on-scroll">
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground mb-4">
               What I Can Build for Your Business
             </h2>
             <p className="text-base md:text-lg text-foreground/60 max-w-2xl font-light">
-              End-to-end consulting, design, development, and launch services for small businesses and growing brands in India.
+              End-to-end consulting, design, engineering, and launch services for global startups and growing brands.
             </p>
           </div>
 
@@ -510,10 +534,10 @@ export default function PortfolioPage() {
             {services.map((service, index) => (
               <div 
                 key={index} 
-                className="bg-[#FCFAF7] border-editorial p-8 flex flex-col justify-between transition-transform hover:-translate-y-1 hover:bg-[#FAF6F0] duration-300"
+                className="bg-[#FCFAF7] border-editorial p-8 flex flex-col justify-between card-interactive reveal-on-scroll group"
               >
                 <div>
-                  <h3 className="font-serif text-2xl font-normal text-foreground mb-4">
+                  <h3 className="font-serif text-2xl font-normal text-foreground mb-4 group-hover:text-brand-indigo transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-sm text-foreground/70 font-light leading-relaxed mb-8">
@@ -525,7 +549,7 @@ export default function PortfolioPage() {
                 <div className="border-t border-border-editorial/60 pt-4 flex flex-col space-y-2">
                   {service.features.map((feat, fIdx) => (
                     <div key={fIdx} className="flex items-center text-xs text-brand-indigo font-semibold tracking-wide uppercase">
-                      <span className="w-1 h-1 bg-brand-rust mr-2 rounded-full"></span>
+                      <span className="w-1.5 h-1.5 bg-brand-rust mr-2 rounded-full group-hover:scale-125 transition-transform"></span>
                       {feat}
                     </div>
                   ))}
@@ -543,7 +567,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
             {/* Left Header */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 reveal-on-scroll">
               <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground leading-tight mb-6">
                 Agency-grade execution without the agency overhead or communication lag.
               </h2>
@@ -556,10 +580,10 @@ export default function PortfolioPage() {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-brand-indigo hover:bg-brand-indigo-hover text-white text-xs font-semibold uppercase tracking-wider"
+                  className="group inline-flex items-center justify-center px-6 py-3.5 bg-brand-indigo hover:bg-brand-indigo-hover text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
                 >
                   Schedule A Call
-                  <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
+                  <ArrowUpRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
             </div>
@@ -567,8 +591,8 @@ export default function PortfolioPage() {
             {/* Right List */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 lg:pl-8">
               
-              <div className="border-b border-border-editorial/60 pb-6">
-                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
+              <div className="border-b border-border-editorial/60 pb-6 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2 group-hover:text-brand-indigo transition-colors">
                   Direct Developer Access
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
@@ -576,8 +600,8 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="border-b border-border-editorial/60 pb-6">
-                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
+              <div className="border-b border-border-editorial/60 pb-6 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2 group-hover:text-brand-indigo transition-colors">
                   Fixed Pricing & Clear Scope
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
@@ -585,8 +609,8 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="border-b border-border-editorial/60 pb-6">
-                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
+              <div className="border-b border-border-editorial/60 pb-6 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2 group-hover:text-brand-indigo transition-colors">
                   Async & Timezone Adaptability
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
@@ -594,8 +618,8 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="border-b border-border-editorial/60 pb-6">
-                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
+              <div className="border-b border-border-editorial/60 pb-6 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2 group-hover:text-brand-indigo transition-colors">
                   Modern Tech Stack
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
@@ -603,8 +627,8 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="pb-6">
-                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
+              <div className="pb-6 reveal-on-scroll group hover:translate-x-1 transition-transform duration-300">
+                <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2 group-hover:text-brand-indigo transition-colors">
                   Full IP & Code Ownership
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
@@ -623,7 +647,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           
           {/* Section Header */}
-          <div className="mb-20">
+          <div className="mb-20 reveal-on-scroll">
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground mb-4">
               How We Work Together
             </h2>
@@ -636,10 +660,10 @@ export default function PortfolioPage() {
           <div className="border-t border-border-editorial">
             
             {/* Step 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6 reveal-on-scroll group hover:bg-[#FAF7F2]/60 px-4 -mx-4 transition-colors duration-300 rounded-sm">
               <div className="md:col-span-4 flex items-baseline space-x-4">
-                <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">01</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Discovery & Scope</h3>
+                <span className="font-serif text-5xl font-extralight text-brand-rust/30 group-hover:text-brand-rust transition-colors duration-300 tracking-tight">01</span>
+                <h3 className="font-serif text-2xl font-normal text-foreground group-hover:text-brand-indigo transition-colors">Discovery & Scope</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
@@ -654,10 +678,10 @@ export default function PortfolioPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6 reveal-on-scroll group hover:bg-[#FAF7F2]/60 px-4 -mx-4 transition-colors duration-300 rounded-sm">
               <div className="md:col-span-4 flex items-baseline space-x-4">
-                <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">02</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Architecture & Design</h3>
+                <span className="font-serif text-5xl font-extralight text-brand-rust/30 group-hover:text-brand-rust transition-colors duration-300 tracking-tight">02</span>
+                <h3 className="font-serif text-2xl font-normal text-foreground group-hover:text-brand-indigo transition-colors">Architecture & Design</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
@@ -672,10 +696,10 @@ export default function PortfolioPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6 reveal-on-scroll group hover:bg-[#FAF7F2]/60 px-4 -mx-4 transition-colors duration-300 rounded-sm">
               <div className="md:col-span-4 flex items-baseline space-x-4">
-                <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">03</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Engineering & Live Staging</h3>
+                <span className="font-serif text-5xl font-extralight text-brand-rust/30 group-hover:text-brand-rust transition-colors duration-300 tracking-tight">03</span>
+                <h3 className="font-serif text-2xl font-normal text-foreground group-hover:text-brand-indigo transition-colors">Engineering & Live Staging</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
@@ -690,10 +714,10 @@ export default function PortfolioPage() {
             </div>
 
             {/* Step 4 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6 reveal-on-scroll group hover:bg-[#FAF7F2]/60 px-4 -mx-4 transition-colors duration-300 rounded-sm">
               <div className="md:col-span-4 flex items-baseline space-x-4">
-                <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">04</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Launch & Handoff</h3>
+                <span className="font-serif text-5xl font-extralight text-brand-rust/30 group-hover:text-brand-rust transition-colors duration-300 tracking-tight">04</span>
+                <h3 className="font-serif text-2xl font-normal text-foreground group-hover:text-brand-indigo transition-colors">Launch & Handoff</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
@@ -717,7 +741,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           
           {/* Section Header with Currency Selector */}
-          <div className="mb-16 text-center max-w-3xl mx-auto">
+          <div className="mb-16 text-center max-w-3xl mx-auto reveal-on-scroll">
             <span className="text-xs uppercase tracking-widest text-brand-rust font-bold block mb-2">Transparent Pricing</span>
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground mb-4">
               Fixed Budgets. Zero Surprises.
@@ -747,7 +771,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
             
             {/* Package 1: Starter */}
-            <div className="bg-[#FAF7F2] border-editorial p-8 flex flex-col justify-between shadow-xs relative">
+            <div className="bg-[#FAF7F2] border-editorial p-8 flex flex-col justify-between card-interactive reveal-on-scroll relative">
               <div>
                 <h3 className="text-xs uppercase font-bold tracking-widest text-muted-foreground mb-4">Starter Website</h3>
                 <div className="flex items-baseline mb-3">
@@ -788,16 +812,16 @@ export default function PortfolioPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center py-3.5 bg-transparent hover:bg-white border border-border-editorial text-foreground font-semibold uppercase tracking-wider text-xs transition-colors"
+                className="w-full text-center py-3.5 bg-transparent hover:bg-white border border-border-editorial hover:border-brand-indigo text-foreground font-semibold uppercase tracking-wider text-xs transition-colors"
               >
                 Discuss Starter Project
               </a>
             </div>
 
             {/* Package 2: Business (Featured) */}
-            <div className="bg-[#FAF7F2] border-2 border-brand-indigo p-8 flex flex-col justify-between shadow-md relative">
+            <div className="bg-[#FAF7F2] border-2 border-brand-indigo p-8 flex flex-col justify-between card-interactive reveal-on-scroll relative shadow-md">
               {/* Popular Tag */}
-              <div className="absolute -top-3.5 left-6 bg-brand-indigo text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1">
+              <div className="absolute -top-3.5 left-6 bg-brand-indigo text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1 shadow-xs">
                 Most Popular
               </div>
 
@@ -849,14 +873,14 @@ export default function PortfolioPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center py-3.5 bg-brand-indigo hover:bg-brand-indigo-hover text-white font-semibold uppercase tracking-wider text-xs transition-colors"
+                className="w-full text-center py-3.5 bg-brand-indigo hover:bg-brand-indigo-hover text-white font-semibold uppercase tracking-wider text-xs transition-colors shadow-sm"
               >
                 Discuss Business Project
               </a>
             </div>
 
             {/* Package 3: Custom Application */}
-            <div className="bg-[#FAF7F2] border-editorial p-8 flex flex-col justify-between shadow-xs relative">
+            <div className="bg-[#FAF7F2] border-editorial p-8 flex flex-col justify-between card-interactive reveal-on-scroll relative">
               <div>
                 <h3 className="text-xs uppercase font-bold tracking-widest text-muted-foreground mb-4">Custom Web App / Portal</h3>
                 <div className="flex items-baseline mb-3">
@@ -898,7 +922,7 @@ export default function PortfolioPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center py-3.5 bg-transparent hover:bg-white border border-border-editorial text-foreground font-semibold uppercase tracking-wider text-xs transition-colors"
+                className="w-full text-center py-3.5 bg-transparent hover:bg-white border border-border-editorial hover:border-brand-indigo text-foreground font-semibold uppercase tracking-wider text-xs transition-colors"
               >
                 Request Custom Quote
               </a>
@@ -907,18 +931,18 @@ export default function PortfolioPage() {
           </div>
 
           {/* Payment Trust Badge Strip */}
-          <div className="mt-12 border-t border-border-editorial/60 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-foreground/70 gap-4">
+          <div className="mt-12 border-t border-border-editorial/60 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-foreground/70 gap-4 reveal-on-scroll">
             <div className="flex items-center space-x-2 font-semibold uppercase tracking-wider">
               <ShieldCheck className="h-4 w-4 text-brand-indigo" />
               <span>Accepted Payment Methods:</span>
             </div>
             <div className="flex flex-wrap items-center gap-3 font-medium">
-              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Wise</span>
-              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Stripe</span>
-              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">PayPal</span>
-              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Direct Wire Transfer</span>
-              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Razorpay (India)</span>
-              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">UPI</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs hover:border-brand-indigo/40 transition-colors">Wise</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs hover:border-brand-indigo/40 transition-colors">Stripe</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs hover:border-brand-indigo/40 transition-colors">PayPal</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs hover:border-brand-indigo/40 transition-colors">Direct Wire Transfer</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs hover:border-brand-indigo/40 transition-colors">Razorpay (India)</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs hover:border-brand-indigo/40 transition-colors">UPI</span>
             </div>
           </div>
 
@@ -931,7 +955,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
             {/* Left Col */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 reveal-on-scroll">
               <span className="text-xs uppercase tracking-wider text-brand-rust font-bold mb-2 block">
                 The engineer behind the work.
               </span>
@@ -955,7 +979,7 @@ export default function PortfolioPage() {
             </div>
 
             {/* Right Col */}
-            <div className="lg:col-span-7 space-y-6 text-foreground/80 leading-relaxed font-light text-sm md:text-base">
+            <div className="lg:col-span-7 space-y-6 text-foreground/80 leading-relaxed font-light text-sm md:text-base reveal-on-scroll">
               <p>
                 I am a full-stack software engineer and B.Tech student at <strong>NIT Durgapur</strong>, dedicated to engineering practical, high-performance, and SEO-optimized web products. I specialize in translating business goals into clean, scalable TypeScript and Next.js applications that build immediate trust with visitors.
               </p>
@@ -986,7 +1010,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           
           {/* Section Header */}
-          <div className="mb-16">
+          <div className="mb-16 reveal-on-scroll">
             <span className="text-xs uppercase tracking-widest text-brand-rust font-bold block mb-2">Honest Work Commitments</span>
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground">
               What You Can Expect
@@ -996,7 +1020,7 @@ export default function PortfolioPage() {
           {/* Grid of Commitments */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between">
+            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between card-interactive reveal-on-scroll">
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
@@ -1008,7 +1032,7 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between">
+            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between card-interactive reveal-on-scroll">
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
@@ -1020,7 +1044,7 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between">
+            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between card-interactive reveal-on-scroll">
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
@@ -1032,7 +1056,7 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between">
+            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between card-interactive reveal-on-scroll">
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
@@ -1044,7 +1068,7 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between">
+            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between card-interactive reveal-on-scroll">
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
@@ -1056,7 +1080,7 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between">
+            <div className="bg-[#FAF7F2] border-editorial p-6 flex flex-col justify-between card-interactive reveal-on-scroll">
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
@@ -1078,7 +1102,7 @@ export default function PortfolioPage() {
         <div className="max-w-4xl mx-auto px-6">
           
           {/* Section Header */}
-          <div className="mb-16 text-center">
+          <div className="mb-16 text-center reveal-on-scroll">
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground mb-4">
               Frequently Asked Questions
             </h2>
@@ -1088,7 +1112,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* Accordion List */}
-          <div className="border-t border-border-editorial divide-y divide-border-editorial">
+          <div className="border-t border-border-editorial divide-y divide-border-editorial reveal-on-scroll">
             {faqs.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
@@ -1100,14 +1124,14 @@ export default function PortfolioPage() {
                   >
                     <span className="text-sm md:text-base font-semibold pr-4">{faq.q}</span>
                     {isOpen ? (
-                      <ChevronUp className="h-5 w-5 text-brand-rust shrink-0" />
+                      <ChevronUp className="h-5 w-5 text-brand-rust shrink-0 transition-transform" />
                     ) : (
-                      <ChevronDown className="h-5 w-5 text-slate-400 shrink-0" />
+                      <ChevronDown className="h-5 w-5 text-slate-400 shrink-0 transition-transform" />
                     )}
                   </button>
                   
                   {isOpen && (
-                    <div className="mt-3 text-xs md:text-sm text-foreground/70 font-light leading-relaxed pr-8 animate-fadeIn">
+                    <div className="mt-3 text-xs md:text-sm text-foreground/70 font-light leading-relaxed pr-8 animate-accordion">
                       <p>{faq.a}</p>
                     </div>
                   )}
@@ -1133,7 +1157,7 @@ export default function PortfolioPage() {
           </svg>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10 reveal-on-scroll">
           <span className="text-xs uppercase tracking-widest text-brand-rust-light font-bold block mb-4">
             LET'S DISCUSS YOUR PROJECT
           </span>
@@ -1150,14 +1174,14 @@ export default function PortfolioPage() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-indigo hover:bg-brand-indigo-light text-sm font-bold uppercase tracking-wider transition-colors shadow-lg"
+              className="group inline-flex items-center justify-center px-8 py-4 bg-white text-brand-indigo hover:bg-brand-indigo-light text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <MessageSquare className="mr-2 h-4.5 w-4.5 fill-brand-indigo/10 text-brand-indigo" />
+              <MessageSquare className="mr-2 h-4.5 w-4.5 fill-brand-indigo/10 text-brand-indigo group-hover:scale-110 transition-transform" />
               WhatsApp: +91 95023 23161
             </a>
             <a 
               href={emailUrl}
-              className="inline-flex items-center justify-center px-8 py-4 bg-brand-indigo-hover text-white border border-white/20 hover:bg-slate-900 text-sm font-bold uppercase tracking-wider transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-brand-indigo-hover text-white border border-white/20 hover:bg-slate-900 text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:border-white/40"
             >
               <Mail className="mr-2 h-4.5 w-4.5 text-white" />
               Send An Email

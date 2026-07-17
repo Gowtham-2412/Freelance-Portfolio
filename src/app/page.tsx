@@ -44,9 +44,10 @@ const Instagram = ({ className = "h-4 w-4" }: { className?: string }) => (
 );
 
 export default function PortfolioPage() {
-  // Navigation states
+  // Navigation & UI states
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currency, setCurrency] = useState<"USD" | "INR">("USD");
 
   // FAQ states
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -66,7 +67,7 @@ export default function PortfolioPage() {
 
   // Pre-filled WhatsApp link
   const whatsappNumber = "919502323161";
-  const whatsappMessage = "Hi Gowtham, I found your portfolio and would like to discuss a website project for my business.";
+  const whatsappMessage = "Hi Gowtham, I found your portfolio and would like to discuss a web project for my business.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const emailUrl = "mailto:gowtham241206@gmail.com";
   const githubUrl = "https://github.com/Gowtham-2412";
@@ -75,64 +76,64 @@ export default function PortfolioPage() {
   const faqs = [
     {
       q: "How much does a website cost?",
-      a: "Basic business websites start at ₹7,999. The final price depends entirely on your project's features, page count, and complexity. After our initial call, I'll send you a detailed proposal with a fixed-price quote so there are no surprises."
+      a: "Starter websites start at $120 (or ₹9,999 for Indian clients), and full multi-page business websites start at $250 (or ₹19,999). Custom web applications and portals are quoted based on specific scope. After our initial call, I provide a transparent, fixed-price proposal with zero hidden fees."
     },
     {
-      q: "How long does a website take?",
-      a: "Smaller websites and landing pages typically take 5–10 days. Larger projects, custom web applications, or platforms with complex database integration may take 2–4 weeks. I always establish clear delivery milestones in the project plan."
+      q: "Do you work with international clients outside India?",
+      a: "Yes! I regularly partner with founders, business owners, and agency clients across North America, Europe, the Middle East, Australia, and Asia. All projects are managed seamlessly via async updates (Loom, GitHub, Slack) and flexible live video calls (Zoom, Google Meet)."
     },
     {
-      q: "Do you work with clients outside Andhra Pradesh?",
-      a: "Yes. I work with business owners, startups, and agencies across all states in India. All consultations, design reviews, and project communications are handled remotely via WhatsApp, Google Meet, and Email."
+      q: "What payment methods do you accept?",
+      a: "For international clients, I accept Wise, Stripe invoices, PayPal, and international bank wire transfers. For Indian clients, I accept UPI, Net Banking, and Razorpay. Milestone-based payments (e.g., 50% upfront, 50% upon launch) ensure mutual security."
     },
     {
-      q: "Will my website work on mobile phones?",
-      a: "Absolutely. Every website I build is developed with a mobile-first approach. It will look polished, load fast, and work perfectly across smartphones, tablets, laptops, and large desktop screens."
+      q: "How long does a website take to build?",
+      a: "Landing pages and starter websites take 5–10 business days. Larger multi-page platforms or custom web applications take 2–4 weeks. Clear delivery milestones are established in writing before work begins."
     },
     {
-      q: "Can you help with domains and deployment?",
-      a: "Yes. I handle the complete setup. This includes setting up your custom domain, configuring DNS, deploying your site to production hosts, and setting up SSL certificates for secure HTTPS access."
+      q: "Do I own 100% of the code and design?",
+      a: "Yes, completely. Upon final payment, 100% intellectual property rights, source code, design assets, and deployment access are transferred directly to you. No vendor lock-in."
     },
     {
-      q: "Do you provide website maintenance?",
-      a: "Yes. I offer ongoing support, domain renewals setup, and website maintenance plans. If you need updates, new features, or technical improvements down the line, I'm available to assist on an hourly or monthly basis."
+      q: "Will my website work perfectly on mobile phones?",
+      a: "Every project is built mobile-first. It is optimized to render crisp, load fast under 2 seconds, and perform smoothly across smartphones, tablets, laptops, and ultra-wide screens globally."
     },
     {
-      q: "Can you guarantee first position on Google?",
-      a: "No. No legitimate developer or marketer can guarantee specific search rankings. However, I build solid technical SEO foundations into every site—including high-speed performance, clean semantic structure, custom metadata, XML sitemaps, and indexing on Google Search Console—giving your business the best possible chance to rank."
+      q: "Can you help with domains, deployment, and ongoing maintenance?",
+      a: "Yes. I handle end-to-end setup including custom domain DNS routing, SSL certificates, production deployment on Vercel or AWS, and ongoing technical support or feature updates when needed."
     }
   ];
 
   const services = [
     {
-      title: "Business Websites",
-      description: "Professional multi-page websites that establish credibility, present services clearly, and drive customer enquiries.",
-      features: ["Clean visual hierarchy", "Contact forms", "SEO optimization"]
+      title: "High-Converting Business Websites",
+      description: "Editorial, ultra-fast websites designed to establish authority, present products or services clearly, and drive international & local inquiries.",
+      features: ["Global & Local SEO", "Custom editorial design", "Mobile-first performance"]
     },
     {
       title: "Full-Stack Web Applications",
-      description: "Custom web applications with database integrations, user authentication, interactive dashboards, and business logic.",
-      features: ["Secure APIs", "Scalable databases", "Interactive UX"]
+      description: "Scalable SaaS products, portals, and web tools built with Next.js, React, Node.js, and secure cloud databases (PostgreSQL, MongoDB).",
+      features: ["User authentication", "Scalable DB architecture", "API & Webhook integrations"]
     },
     {
-      title: "E-commerce Development",
-      description: "Custom online stores with seamless payment gateway integrations, shopping carts, product catalogs, and order management systems.",
-      features: ["Secure checkouts", "Payment integrations", "Inventory management"]
+      title: "Global E-Commerce Platforms",
+      description: "Modern online stores built with seamless payment gateway integrations (Stripe, PayPal, Razorpay), multi-currency support, and fast checkout flows.",
+      features: ["Multi-currency checkout", "Global payment security", "Product catalog management"]
     },
     {
-      title: "Website Redesign",
-      description: "Modernize outdated sites with a clean, editorial look, faster load speeds, responsive layouts, and better conversion flows.",
-      features: ["Performance audit", "Modern UI", "No SEO traffic loss"]
+      title: "Website Redesign & Speed Tuning",
+      description: "Transform sluggish, dated sites into modern, high-speed web experiences with improved Core Web Vitals and higher conversion rates.",
+      features: ["Core Web Vitals tuning", "Modern UI overhaul", "Zero SEO traffic disruption"]
     },
     {
-      title: "SEO & Performance Setup",
-      description: "Technical SEO optimization including sitemap generation, structured metadata, Google Search Console indexing, and speed tuning.",
-      features: ["Fast Core Web Vitals", "Structured Data Schema", "Index optimization"]
+      title: "Technical SEO & Schema Setup",
+      description: "Comprehensive technical SEO foundations including JSON-LD structured data, XML sitemaps, canonical tags, and search engine indexing.",
+      features: ["Structured Data Schema", "Fast page speeds", "Google Search Console indexing"]
     },
     {
-      title: "Deployment & Domain Setup",
-      description: "Hosting configuration, SSL setups, custom domains, and automated deployments so your site runs reliably 24/7.",
-      features: ["SSL certificates", "Modern cloud hosting", "Zero-downtime deploys"]
+      title: "Cloud Deployment & Maintenance",
+      description: "Production setups on modern platforms (Vercel, AWS), custom domain DNS routing, SSL security, and ongoing technical maintenance.",
+      features: ["SSL & Security headers", "Global CDN distribution", "Zero-downtime deployment"]
     }
   ];
 
@@ -167,8 +168,23 @@ export default function PortfolioPage() {
             <a href="#about" className="text-foreground/80 hover:text-brand-indigo transition-colors">About</a>
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center">
+          {/* Desktop CTA & Currency Switcher */}
+          <div className="hidden md:flex items-center space-x-4">
+            <div className="inline-flex items-center bg-[#F3EFEA] p-1 rounded-sm border border-border-editorial text-xs font-semibold">
+              <button 
+                onClick={() => setCurrency("USD")}
+                className={`px-2.5 py-1 transition-all ${currency === "USD" ? "bg-brand-indigo text-white shadow-xs" : "text-foreground/70 hover:text-foreground"}`}
+              >
+                USD ($)
+              </button>
+              <button 
+                onClick={() => setCurrency("INR")}
+                className={`px-2.5 py-1 transition-all ${currency === "INR" ? "bg-brand-indigo text-white shadow-xs" : "text-foreground/70 hover:text-foreground"}`}
+              >
+                INR (₹)
+              </button>
+            </div>
+
             <a 
               href={whatsappUrl}
               target="_blank"
@@ -194,6 +210,24 @@ export default function PortfolioPage() {
         {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-[#FCFAF7] border-b border-border-editorial px-6 py-8 flex flex-col space-y-6 shadow-md transition-all duration-300">
+            <div className="flex items-center justify-between pb-2 border-b border-border-editorial">
+              <span className="text-xs uppercase font-bold tracking-wider text-muted-foreground">Currency</span>
+              <div className="inline-flex items-center bg-[#F3EFEA] p-1 rounded-sm border border-border-editorial text-xs font-semibold">
+                <button 
+                  onClick={() => setCurrency("USD")}
+                  className={`px-3 py-1 transition-all ${currency === "USD" ? "bg-brand-indigo text-white shadow-xs" : "text-foreground/70"}`}
+                >
+                  USD ($)
+                </button>
+                <button 
+                  onClick={() => setCurrency("INR")}
+                  className={`px-3 py-1 transition-all ${currency === "INR" ? "bg-brand-indigo text-white shadow-xs" : "text-foreground/70"}`}
+                >
+                  INR (₹)
+                </button>
+              </div>
+            </div>
+
             <nav className="flex flex-col space-y-4 text-base font-medium">
               <a 
                 href="#work" 
@@ -252,22 +286,22 @@ export default function PortfolioPage() {
             {/* Left Column: Headline and Copy */}
             <div className="lg:col-span-6 flex flex-col justify-center">
               
-              {/* Subtle Tag */}
+              {/* Global Availability Tag */}
               <div className="inline-flex items-center space-x-2 text-brand-rust mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-rust"></span>
+                <Globe2 className="h-4 w-4 text-brand-rust animate-pulse" />
                 <span className="text-xs uppercase font-bold tracking-widest font-sans">
-                  Available for Remote Projects Across India
+                  Available for Remote Projects Worldwide & India · EST, GMT & IST
                 </span>
               </div>
 
               {/* Main Headline */}
               <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-[1.08] mb-5">
-                Websites built to help your business get <span className="italic font-normal text-brand-indigo">noticed</span>, <span className="italic font-normal text-brand-indigo">trusted</span>, and <span className="italic font-normal text-brand-indigo">contacted</span>.
+                Websites & web apps built to make your business <span className="italic font-normal text-brand-indigo">stand out</span>, <span className="italic font-normal text-brand-indigo">build trust</span>, and <span className="italic font-normal text-brand-indigo">convert</span>.
               </h1>
 
               {/* Supporting Copy */}
               <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-2xl mb-6">
-                Sai Gowtham designs and develops fast, modern, and SEO-friendly websites for businesses across India — from local service companies and real estate agencies to growing brands and custom software. Handled completely remotely with absolute clarity.
+                Sai Gowtham engineers fast, modern, and SEO-friendly web experiences for startups, growing brands, and businesses across the US, Europe, Middle East, and India — delivered with direct collaboration, total transparency, and zero agency bloat.
               </p>
 
               {/* Dual CTAs & Trust Strip */}
@@ -293,15 +327,15 @@ export default function PortfolioPage() {
               <div className="border-t border-border-editorial pt-6 flex flex-wrap gap-y-3 gap-x-8 text-xs text-foreground/60 uppercase tracking-widest font-semibold">
                 <div className="flex items-center">
                   <Check className="mr-2 h-4 w-4 text-brand-rust" />
-                  Clear Pricing
+                  Fixed Budget Quotes
                 </div>
                 <div className="flex items-center">
                   <Check className="mr-2 h-4 w-4 text-brand-rust" />
-                  Direct Communication
+                  Direct Developer Access
                 </div>
                 <div className="flex items-center">
                   <Check className="mr-2 h-4 w-4 text-brand-rust" />
-                  Fast Delivery
+                  100% Code Ownership
                 </div>
               </div>
 
@@ -331,30 +365,30 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             
             <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Full-Stack Development</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Global & Remote First</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
-                Frontend, backend, databases, and hosting setups handled end-to-end.
+                Async video updates & flexible sync calls adapted to US, EU, and IST timezones.
               </p>
             </div>
             
             <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Direct Communication</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Direct Developer Access</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
-                Work directly with the developer building your site. No agency managers.
+                Work directly with the engineer building your site. Zero middle management.
               </p>
             </div>
             
             <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Built for Performance</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">High-Speed Engineering</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
-                Speed-optimized and mobile-responsive websites to load instantly.
+                Sub-2-second loads, mobile-first layouts, and clean Next.js architecture.
               </p>
             </div>
             
             <div className="flex flex-col border-l-2 border-brand-indigo pl-4">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Across India</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">Full IP Transfer</span>
               <p className="text-sm text-foreground/80 leading-relaxed">
-                Available for remote consultation and projects all over India.
+                You own 100% of your source code, design assets, and cloud deployment.
               </p>
             </div>
 
@@ -511,10 +545,10 @@ export default function PortfolioPage() {
             {/* Left Header */}
             <div className="lg:col-span-5">
               <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground leading-tight mb-6">
-                Agency-quality execution without the agency complexity.
+                Agency-grade execution without the agency overhead or communication lag.
               </h2>
               <p className="text-foreground/60 font-light leading-relaxed mb-8">
-                Hiring an agency means paying for project managers, account executives, and office overhead. By working directly with an independent full-stack developer, you get direct collaboration, transparent pricing, and the developer building your project handling your calls.
+                Hiring an agency means paying for account executives, project managers, and overhead. By working directly with an independent full-stack developer, you get direct technical collaboration, transparent fixed pricing, fast async updates, and 100% code ownership.
               </p>
               
               <div className="pt-2">
@@ -535,46 +569,46 @@ export default function PortfolioPage() {
               
               <div className="border-b border-border-editorial/60 pb-6">
                 <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
-                  You Work Directly With Me
+                  Direct Developer Access
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  No communication gap. The same person who understands your business goals will write every line of your website's code.
+                  Zero middle management. The engineer building your product speaks directly with you, ensuring your business goals translate directly into code.
                 </p>
               </div>
 
               <div className="border-b border-border-editorial/60 pb-6">
                 <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
-                  Clear Scope and Pricing
+                  Fixed Pricing & Clear Scope
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  Know exactly what is being built, when it will be delivered, and what it costs. No hidden fees or surprise developer invoices.
+                  Know exactly what is being built, when it will be delivered, and what it costs. Transparent milestone payments with zero surprise invoices.
                 </p>
               </div>
 
               <div className="border-b border-border-editorial/60 pb-6">
                 <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
-                  Modern Technology
+                  Async & Timezone Adaptability
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  Websites built using high-performance setups (Next.js, Tailwind, Node.js) ensuring faster speeds and cleaner structures than typical drag-and-drop builders.
+                  Work efficiently across EST, GMT/CET, and IST. Clear Loom video walkthroughs, GitHub progress preview links, and responsive messages.
                 </p>
               </div>
 
               <div className="border-b border-border-editorial/60 pb-6">
                 <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
-                  Mobile-First Development
+                  Modern Tech Stack
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  Over 75% of your customers browse on mobile. All sites are meticulously built to render beautifully and load fast on 4G/5G mobile grids.
+                  High-performance web applications built with Next.js 15, TypeScript, React, Tailwind, and Node.js for lightning speed and long-term scalability.
                 </p>
               </div>
 
               <div className="pb-6">
                 <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-2">
-                  Support After Launch
+                  Full IP & Code Ownership
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  From deploying to production to hookups for custom domain names and post-launch maintenance, I'll be there to help resolve issues.
+                  You retain 100% intellectual property, repository access, design assets, and cloud deployment rights upon project completion.
                 </p>
               </div>
 
@@ -594,7 +628,7 @@ export default function PortfolioPage() {
               How We Work Together
             </h2>
             <p className="text-base md:text-lg text-foreground/60 max-w-2xl font-light">
-              A transparent, 4-step development process focused on business outcomes, speed, and clear check-ins.
+              A transparent 4-step workflow designed for international and domestic clients to move fast with total clarity.
             </p>
           </div>
 
@@ -605,15 +639,16 @@ export default function PortfolioPage() {
             <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
               <div className="md:col-span-4 flex items-baseline space-x-4">
                 <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">01</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Understand</h3>
+                <h3 className="font-serif text-2xl font-normal text-foreground">Discovery & Scope</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
-                  We schedule an initial chat to understand your business, identify who your target customers are, map out necessary features, and define the website's ultimate goal (capturing leads, bookings, or showing portfolio).
+                  We schedule a call or sync asynchronously to understand your business objectives, target audience, key functional requirements, and target launch timeline.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Business discovery</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Feature mapping</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Fixed proposal</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Milestone agreement</span>
                 </div>
               </div>
             </div>
@@ -622,16 +657,16 @@ export default function PortfolioPage() {
             <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
               <div className="md:col-span-4 flex items-baseline space-x-4">
                 <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">02</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Plan & Design</h3>
+                <h3 className="font-serif text-2xl font-normal text-foreground">Architecture & Design</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
-                  I map out the content structure, copy hierarchy, website navigation flow, and visual direction. You approve the mockups and layout scheme before any coding begins, ensuring absolute alignment.
+                  I map out the content structure, copy hierarchy, UX navigation, and editorial visual direction. You approve wireframes and design schemes before coding begins.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Content outline</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Wireframes</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Design direction</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">UX wireframes</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Design system</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Content hierarchy</span>
                 </div>
               </div>
             </div>
@@ -640,16 +675,16 @@ export default function PortfolioPage() {
             <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
               <div className="md:col-span-4 flex items-baseline space-x-4">
                 <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">03</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Build & Review</h3>
+                <h3 className="font-serif text-2xl font-normal text-foreground">Engineering & Live Staging</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
-                  I write clean, fast, and responsive code (using Next.js and Tailwind). I'll provide you with a private review link so you can browse the in-progress website on your mobile and desktop, suggesting adjustments.
+                  I write high-speed Next.js and React code. You receive a live private staging link and Loom video updates so you can test real-time progress on mobile and desktop.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase font-sans">Custom React/Next code</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Private testing link</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Feedback loops</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Next.js & React</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Live preview staging</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Async Loom reviews</span>
                 </div>
               </div>
             </div>
@@ -658,16 +693,16 @@ export default function PortfolioPage() {
             <div className="grid grid-cols-1 md:grid-cols-12 py-12 border-b border-border-editorial items-start gap-6">
               <div className="md:col-span-4 flex items-baseline space-x-4">
                 <span className="font-serif text-5xl font-extralight text-brand-rust/30 tracking-tight">04</span>
-                <h3 className="font-serif text-2xl font-normal text-foreground">Launch & Support</h3>
+                <h3 className="font-serif text-2xl font-normal text-foreground">Launch & Handoff</h3>
               </div>
               <div className="md:col-span-8">
                 <p className="text-sm md:text-base text-foreground/70 leading-relaxed font-light max-w-2xl">
-                  I wire up your domain (e.g., yourbusiness.in), configure SSL certificates, deploy the site live to fast servers, register it on Google Search Console, and hand over deployment access along with post-launch guide notes.
+                  I configure your custom domain (e.g. yourbusiness.com or yourbusiness.in), set up SSL security, deploy to global CDN edge servers, submit structured sitemaps to Google Search Console, and hand over 100% repository access.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase font-sans">Domain pointing</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase font-sans">Google index submission</span>
-                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Documentation notes</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Global CDN deploy</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">Google indexing</span>
+                  <span className="text-[10px] bg-card-bg border border-border-editorial px-2.5 py-1 text-foreground/60 font-semibold uppercase">100% IP handoff</span>
                 </div>
               </div>
             </div>
@@ -681,14 +716,31 @@ export default function PortfolioPage() {
       <section id="pricing" className="py-24 border-b border-border-editorial">
         <div className="max-w-7xl mx-auto px-6">
           
-          {/* Section Header */}
+          {/* Section Header with Currency Selector */}
           <div className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="text-xs uppercase tracking-widest text-brand-rust font-bold block mb-2">Transparent Pricing</span>
             <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground mb-4">
-              Transparent Project Pricing
+              Fixed Budgets. Zero Surprises.
             </h2>
-            <p className="text-base md:text-lg text-foreground/60 font-light">
-              Clear, upfront budgets matching your requirements. No hourly estimations, just fixed pricing per project scope.
+            <p className="text-base md:text-lg text-foreground/60 font-light mb-8">
+              Upfront milestone pricing for global startups and businesses. Toggle your preferred currency below.
             </p>
+
+            {/* Interactive Currency Switcher */}
+            <div className="inline-flex items-center bg-[#F3EFEA] p-1.5 rounded border border-border-editorial shadow-xs">
+              <button 
+                onClick={() => setCurrency("USD")}
+                className={`px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-none ${currency === "USD" ? "bg-brand-indigo text-white shadow-sm" : "text-foreground/70 hover:text-foreground"}`}
+              >
+                USD ($ International)
+              </button>
+              <button 
+                onClick={() => setCurrency("INR")}
+                className={`px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-none ${currency === "INR" ? "bg-brand-indigo text-white shadow-sm" : "text-foreground/70 hover:text-foreground"}`}
+              >
+                INR (₹ India)
+              </button>
+            </div>
           </div>
 
           {/* Pricing Grid */}
@@ -700,36 +752,34 @@ export default function PortfolioPage() {
                 <h3 className="text-xs uppercase font-bold tracking-widest text-muted-foreground mb-4">Starter Website</h3>
                 <div className="flex items-baseline mb-3">
                   <span className="text-2xl font-semibold text-foreground/70 mr-1">Starting at</span>
-                  <span className="text-4xl font-serif font-medium text-foreground">₹7,999</span>
+                  <span className="text-4xl font-serif font-medium text-foreground">
+                    {currency === "USD" ? "$120" : "₹9,999"}
+                  </span>
                 </div>
                 <p className="text-xs text-foreground/60 leading-relaxed font-light mb-8 border-b border-border-editorial pb-4">
-                  Suitable for local businesses, cafes, clinics, or professionals who need a clean, focused, high-speed single-page presence.
+                  Ideal for independent professionals, consultants, or local service companies needing a clean, high-speed single-page web presence.
                 </p>
                 
                 <ul className="space-y-3.5 mb-8 text-xs text-foreground/80">
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Professional one-page website
+                    High-converting single page website
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Mobile responsive design
+                    Mobile-first responsive design
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    WhatsApp instant chat integration
+                    Contact form & WhatsApp/Email integration
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Contact information & Map integration
+                    Technical SEO & Metadata setup
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Basic technical SEO foundations
-                  </li>
-                  <li className="flex items-center">
-                    <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Production deployment assistance
+                    Fast global CDN deployment
                   </li>
                 </ul>
               </div>
@@ -755,10 +805,12 @@ export default function PortfolioPage() {
                 <h3 className="text-xs uppercase font-bold tracking-widest text-brand-indigo mb-4">Business Website</h3>
                 <div className="flex items-baseline mb-3">
                   <span className="text-2xl font-semibold text-brand-indigo mr-1">Starting at</span>
-                  <span className="text-4xl font-serif font-medium text-brand-indigo">₹14,999</span>
+                  <span className="text-4xl font-serif font-medium text-brand-indigo">
+                    {currency === "USD" ? "$250" : "₹19,999"}
+                  </span>
                 </div>
                 <p className="text-xs text-foreground/60 leading-relaxed font-light mb-8 border-b border-border-editorial pb-4">
-                  For growing businesses, real estate agents, manufacturers, or hospitality venues requiring a comprehensive website.
+                  For growing businesses, real estate firms, agencies, or startups requiring a multi-page editorial website.
                 </p>
                 
                 <ul className="space-y-3.5 mb-8 text-xs text-foreground/80">
@@ -768,11 +820,11 @@ export default function PortfolioPage() {
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-indigo shrink-0" />
-                    Custom-tailored responsive design
+                    Custom-tailored editorial responsive UI
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-indigo shrink-0" />
-                    Custom inquiry/contact forms
+                    Custom lead inquiry & contact forms
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-indigo shrink-0" />
@@ -780,15 +832,15 @@ export default function PortfolioPage() {
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-indigo shrink-0" />
-                    Rigorous technical SEO (schema + sitemaps)
+                    Full JSON-LD Schema & XML Sitemaps
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-indigo shrink-0" />
-                    Google Search Console submission
+                    Google Search Console indexing
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-indigo shrink-0" />
-                    Deployment & custom domain connection
+                    Custom domain setup & SSL security
                   </li>
                 </ul>
               </div>
@@ -806,38 +858,38 @@ export default function PortfolioPage() {
             {/* Package 3: Custom Application */}
             <div className="bg-[#FAF7F2] border-editorial p-8 flex flex-col justify-between shadow-xs relative">
               <div>
-                <h3 className="text-xs uppercase font-bold tracking-widest text-muted-foreground mb-4">Custom Web App</h3>
+                <h3 className="text-xs uppercase font-bold tracking-widest text-muted-foreground mb-4">Custom Web App / Portal</h3>
                 <div className="flex items-baseline mb-3">
                   <span className="text-4xl font-serif font-medium text-foreground">Custom Quote</span>
                 </div>
                 <p className="text-xs text-foreground/60 leading-relaxed font-light mb-8 border-b border-border-editorial pb-4">
-                  For startups, platforms, and businesses requiring customized database-backed logic or dynamic portal tools.
+                  For startups and platforms requiring complex full-stack web app logic, database schemas, dynamic dashboards, or payment gateways.
                 </p>
                 
                 <ul className="space-y-3.5 mb-8 text-xs text-foreground/80">
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    User Authentication (Google, email logins)
+                    User Authentication (Google, OAuth, JWT)
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Dynamic dashboards & Admin portal
+                    Interactive Dashboards & Admin Portals
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Custom Database architecture (MongoDB/PostgreSQL)
+                    Database Architecture (PostgreSQL / MongoDB)
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    File upload workflows (PDF, images, receipts)
+                    Payment Gateways (Stripe, PayPal, Razorpay)
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    External API integrations (Payment, Maps, AI)
+                    External API & Webhook integrations
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2.5 text-brand-rust shrink-0" />
-                    Secure server configurations & WebSockets
+                    Scalable cloud infrastructure setup
                   </li>
                 </ul>
               </div>
@@ -854,11 +906,20 @@ export default function PortfolioPage() {
 
           </div>
 
-          {/* Pricing notes */}
-          <div className="mt-12 max-w-4xl mx-auto border-t border-border-editorial/60 pt-6 text-center">
-            <p className="text-xs text-foreground/60 leading-relaxed">
-              <strong>Please Note:</strong> Final pricing depends entirely on project requirements, features, and precise scope. Custom domain registration, premium third-party service fees, and cloud hosting infrastructure fees may be billed separately where applicable.
-            </p>
+          {/* Payment Trust Badge Strip */}
+          <div className="mt-12 border-t border-border-editorial/60 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-foreground/70 gap-4">
+            <div className="flex items-center space-x-2 font-semibold uppercase tracking-wider">
+              <ShieldCheck className="h-4 w-4 text-brand-indigo" />
+              <span>Accepted Payment Methods:</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 font-medium">
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Wise</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Stripe</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">PayPal</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Direct Wire Transfer</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">Razorpay (India)</span>
+              <span className="bg-[#FAF7F2] border border-border-editorial px-3 py-1 rounded-xs">UPI</span>
+            </div>
           </div>
 
         </div>
@@ -872,34 +933,40 @@ export default function PortfolioPage() {
             {/* Left Col */}
             <div className="lg:col-span-5">
               <span className="text-xs uppercase tracking-wider text-brand-rust font-bold mb-2 block">
-                The developer behind the work.
+                The engineer behind the work.
               </span>
               <h2 className="font-serif text-4xl md:text-5xl font-light tracking-tight text-foreground leading-tight mb-6">
                 Sai Gowtham
               </h2>
               <div className="w-16 h-0.5 bg-brand-indigo mb-6"></div>
               <p className="text-sm text-foreground/60 leading-relaxed font-light mb-6">
-                Full-Stack Developer based in Durgapur, West Bengal. Available for remote projects and consultancies anywhere across India.
+                Freelance Full-Stack Developer based in India. Partnering remotely with startups, businesses, and agency teams across North America, Europe, Middle East, and Asia.
               </p>
-              <div className="flex items-center text-xs text-foreground/70 font-semibold">
-                <MapPin className="h-4 w-4 text-brand-rust mr-1.5" />
-                NIT Durgapur, West Bengal · India
+              <div className="flex flex-col space-y-2 text-xs text-foreground/70 font-semibold">
+                <div className="flex items-center">
+                  <MapPin className="h-4 w-4 text-brand-rust mr-1.5 shrink-0" />
+                  <span>NIT Durgapur, West Bengal · India</span>
+                </div>
+                <div className="flex items-center">
+                  <Clock className="h-4 w-4 text-brand-rust mr-1.5 shrink-0" />
+                  <span>Flexible Hours: EST, GMT/CET & IST Compatible</span>
+                </div>
               </div>
             </div>
 
             {/* Right Col */}
             <div className="lg:col-span-7 space-y-6 text-foreground/80 leading-relaxed font-light text-sm md:text-base">
               <p>
-                I am a full-stack web developer and B.Tech student at <strong>NIT Durgapur</strong>, dedicated to building practical, high-quality, and SEO-friendly websites. I enjoy translating business objectives into clean, performant code that helps companies make a professional impression.
+                I am a full-stack software engineer and B.Tech student at <strong>NIT Durgapur</strong>, dedicated to engineering practical, high-performance, and SEO-optimized web products. I specialize in translating business goals into clean, scalable TypeScript and Next.js applications that build immediate trust with visitors.
               </p>
               <p>
-                My experience covers the entire lifecycle of web applications—including drafting responsive user interfaces, writing secure APIs, designing database models, configuring servers, and deploying assets to production cloud platforms.
+                My expertise spans the complete development lifecycle—from crafting responsive editorial user interfaces and secure REST/GraphQL APIs to architecting relational database models, managing cloud servers (Vercel, AWS), and optimizing Core Web Vitals.
               </p>
               <p>
-                Rather than working with complicated agency hierarchies, I consult directly with business owners, builders, startups, and clinics. This collaborative workflow ensures we build exactly what you need without paying for agency overhead.
+                Instead of dealing with multi-layered agency hierarchies or unaccountable offshore teams, you collaborate directly with me. This direct technical partnership guarantees fast communication, transparent milestone pricing, and 100% intellectual property transfer.
               </p>
 
-              {/* Natural technology mention */}
+              {/* Technology stack list */}
               <div className="border-t border-border-editorial/60 pt-6">
                 <span className="text-xs uppercase font-bold tracking-wider text-muted-foreground block mb-4">
                   Tech Stack Integration
@@ -914,7 +981,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* WHAT YOU CAN EXPECT (Testimonials Alternative) */}
+      {/* WHAT YOU CAN EXPECT (Testimonials & Work Commitments) */}
       <section className="py-24 border-b border-border-editorial">
         <div className="max-w-7xl mx-auto px-6">
           
@@ -933,10 +1000,10 @@ export default function PortfolioPage() {
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
-                  Clear Communication
+                  Fluent Async Communication
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  I explain technical problems in simple terms. You will receive clear responses to your questions and updates on progress.
+                  Clear written English updates, detailed Loom videos, and progress tracking on GitHub and Slack so you never wonder about project status.
                 </p>
               </div>
             </div>
@@ -945,10 +1012,10 @@ export default function PortfolioPage() {
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
-                  Transparent Project Scope
+                  Transparent Scope & Fixed Budgets
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  Before starting, we define exactly what will be built in writing. Any adjustments to the scope are discussed beforehand.
+                  We define project scope and milestones in writing before work begins. Zero unexpected hourly bills or hidden development charges.
                 </p>
               </div>
             </div>
@@ -957,10 +1024,10 @@ export default function PortfolioPage() {
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
-                  Regular Progress Updates
+                  Timezone Flexibility
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  You'll have access to a private testing server URL where you can view updates as the code is written, keeping you in control.
+                  Overlap hours available for live Zoom / Google Meet syncs during US East Coast (EST), European (GMT/CET), and Indian (IST) business hours.
                 </p>
               </div>
             </div>
@@ -969,10 +1036,10 @@ export default function PortfolioPage() {
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
-                  Responsive Development
+                  High-Speed Engineering
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  I construct clean code structures that load quickly on mobile devices, ensuring visitors can reach your business on any network.
+                  Clean code structures optimized to load under 2 seconds globally, ensuring your visitors on any network enjoy an instant experience.
                 </p>
               </div>
             </div>
@@ -984,7 +1051,7 @@ export default function PortfolioPage() {
                   Direct Developer Access
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  You work directly with the person writing your project's code. Calls or messages are handled directly with me.
+                  You work directly with the person writing your project's code. Technical decisions are discussed straightforwardly with zero fluff.
                 </p>
               </div>
             </div>
@@ -993,10 +1060,10 @@ export default function PortfolioPage() {
               <div>
                 <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3 flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-brand-rust shrink-0" />
-                  Post-Launch Support
+                  100% IP & Post-Launch Handoff
                 </h4>
                 <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  I provide deployment handoff sheets and remain available for support, maintenance setups, or feature updates.
+                  You receive full ownership of source code repositories, design assets, and cloud deployment setups with clear handoff documentation.
                 </p>
               </div>
             </div>
@@ -1016,7 +1083,7 @@ export default function PortfolioPage() {
               Frequently Asked Questions
             </h2>
             <p className="text-base text-foreground/60 font-light">
-              Clear answers to help you understand how freelance web projects work.
+              Clear answers to help you understand how remote freelance web engineering works.
             </p>
           </div>
 
@@ -1071,10 +1138,10 @@ export default function PortfolioPage() {
             LET'S DISCUSS YOUR PROJECT
           </span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-8 leading-[1.1]">
-            Have a website idea or a business that needs a better online presence?
+            Ready to build a website or app that stands out globally?
           </h2>
           <p className="text-base md:text-lg text-brand-indigo-light font-light leading-relaxed max-w-2xl mx-auto mb-12">
-            Tell me about your business, what features you need, and your approximate budget. I'll help you understand the most practical and secure way to build it.
+            Share your project goals, required features, or target launch date. I'll provide a clear technical recommendation and fixed proposal.
           </p>
 
           {/* Contact buttons */}
@@ -1137,7 +1204,7 @@ export default function PortfolioPage() {
                 </span>
               </a>
               <p className="text-xs text-foreground/60 leading-relaxed font-light max-w-sm">
-                Designing and building high-performance, conversion-focused websites and applications for business owners and startups across India.
+                Designing and building high-performance, conversion-focused websites and web applications for startups, founders, and businesses globally and in India.
               </p>
             </div>
 
@@ -1183,7 +1250,7 @@ export default function PortfolioPage() {
 
           {/* Copyright row */}
           <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-foreground/50">
-            <span className="mt-2 sm:mt-0 font-light">Handcrafted by Sai Gowtham.</span>
+            <span className="mt-2 sm:mt-0 font-light">Handcrafted by Sai Gowtham. Available for global remote projects.</span>
           </div>
         </div>
       </footer>

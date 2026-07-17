@@ -16,16 +16,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sai Gowtham | Freelance Full-Stack Web Developer & Consultant India",
-  description: "Sai Gowtham designs and develops fast, modern, and SEO-friendly websites and web applications for businesses across India. Get direct developer communication, clear pricing, and fast delivery.",
+  title: "Sai Gowtham | Freelance Full-Stack Web Developer & Technical Partner",
+  description: "Sai Gowtham designs and develops fast, modern, and SEO-friendly websites & web applications for startups, businesses, and agency partners globally and in India.",
   keywords: [
-    "Freelance Web Developer India",
-    "Full-Stack Web Developer India",
-    "React Developer India",
+    "Freelance Full-Stack Developer",
     "Next.js Developer India",
-    "Web Development Services India",
-    "Real Estate Website Developer India",
-    "Business Website Developer India",
+    "Remote Web Developer US EU India",
+    "Full-Stack Web Application Developer",
+    "React & Next.js Consultant",
+    "Web Development Services Global",
+    "Real Estate Website Developer",
+    "Business Website Developer",
     "Sai Gowtham",
     "NIT Durgapur Web Developer"
   ],
@@ -33,16 +34,17 @@ export const metadata: Metadata = {
   creator: "Sai Gowtham",
   openGraph: {
     type: "website",
-    locale: "en_IN",
+    locale: "en_US",
+    alternateLocale: ["en_IN"],
     url: "https://github.com/Gowtham-2412",
-    title: "Sai Gowtham | Freelance Full-Stack Web Developer & Consultant India",
-    description: "Sai Gowtham designs and develops fast, modern, and SEO-friendly websites and web applications for businesses across India. Get direct developer communication, clear pricing, and fast delivery.",
+    title: "Sai Gowtham | Freelance Full-Stack Web Developer & Technical Partner",
+    description: "Designing fast, modern, and high-converting web applications for global startups, brands, and Indian businesses.",
     siteName: "Sai Gowtham Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sai Gowtham | Freelance Full-Stack Web Developer & Consultant India",
-    description: "Sai Gowtham designs and develops fast, modern, and SEO-friendly websites and web applications for businesses across India.",
+    title: "Sai Gowtham | Freelance Full-Stack Web Developer & Technical Partner",
+    description: "Designing fast, modern, and high-converting web applications for global startups, brands, and Indian businesses.",
   },
   metadataBase: new URL("https://github.com/Gowtham-2412"),
 };
@@ -56,11 +58,19 @@ export default function RootLayout({
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Sai Gowtham - Freelance Web Developer",
-    "description": "Sai Gowtham designs and develops fast, modern, and SEO-friendly websites and web applications for businesses across India.",
+    "name": "Sai Gowtham - Freelance Full-Stack Web Developer",
+    "description": "Sai Gowtham designs and develops fast, modern, and SEO-friendly websites & web applications for startups, businesses, and agencies globally and in India.",
     "url": "https://github.com/Gowtham-2412",
     "telephone": "+919502323161",
-    "priceRange": "₹7999 - ₹50000",
+    "priceRange": "$120 - $1000+ / ₹9999 - ₹50000+",
+    "areaServed": [
+      "Worldwide",
+      "United States",
+      "United Kingdom",
+      "European Union",
+      "United Arab Emirates",
+      "India"
+    ],
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "IN",
@@ -70,11 +80,12 @@ export default function RootLayout({
     "knowsAbout": [
       "Web Development",
       "Full-Stack Web Applications",
-      "Real Estate Websites",
       "Next.js",
       "React",
       "Node.js",
+      "TypeScript",
       "Search Engine Optimization (SEO)",
+      "Multi-Currency E-commerce",
       "Database Systems",
       "Tailwind CSS"
     ],
@@ -82,16 +93,16 @@ export default function RootLayout({
       {
         "@type": "Offer",
         "name": "Starter Website Package",
-        "price": "7999",
-        "priceCurrency": "INR",
-        "description": "Focused one-page websites for local businesses and independent professionals."
+        "price": "120",
+        "priceCurrency": "USD",
+        "description": "Focused high-speed websites for independent professionals and local businesses globally."
       },
       {
         "@type": "Offer",
         "name": "Business Website Package",
-        "price": "14999",
-        "priceCurrency": "INR",
-        "description": "Complete multi-page professional website for growing businesses and services."
+        "price": "250",
+        "priceCurrency": "USD",
+        "description": "Complete multi-page professional website for growing businesses and global startups."
       }
     ]
   };
